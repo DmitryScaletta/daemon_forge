@@ -113,7 +113,7 @@ fn execute_daemon_logic<T>(daemon: ForgeDaemon<T>) -> DaemonResult<T> {
                 )));
             }
             // Always change dir to "/" after chroot
-            if libc::chdir(b"/\0".as_ptr() as *const i8) < 0 {
+            if libc::chdir(b"/\0".as_ptr() as *const libc::c_char) < 0 {
                 return Err(DaemonError::Io(io::Error::last_os_error()));
             }
         }
